@@ -18,7 +18,7 @@
 ### Фреймворки
 - Django
 #### Библиотека Frontend
-- ReactJS
+- React Native
 #### Библиотеки Python
 - Rest Framework
 ### База данных
@@ -29,7 +29,7 @@
 - react-router
 - lucide-react
 ### Other toools
- - ExpoApp
+ - Expo App
 ## Установка и запуск Frontend части:
 Напишите в терминале
 - `cd Frontend` (Переход в директорию)
