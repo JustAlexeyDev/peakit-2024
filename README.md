@@ -28,6 +28,8 @@
 - reactDOM
 - react-router
 - lucide-react
+### Other toools
+ - ExpoApp
 ## Установка и запуск Frontend части:
 Напишите в терминале
 - `cd Frontend` (Переход в директорию)
