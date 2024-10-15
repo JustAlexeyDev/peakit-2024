@@ -14,7 +14,7 @@
 - JSX
 - HTML
 - CSS
-- Python 3.10.11
+- Python 3.11.2
 ### Фреймворки
 - Django
 #### Библиотека Frontend
