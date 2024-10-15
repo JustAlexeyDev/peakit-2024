@@ -1,7 +1,7 @@
 const Home = () => {
   return(
     <div>
-      200
+      Главная страница
     </div>
   );
 }
