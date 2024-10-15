@@ -9,6 +9,7 @@
 
 ## Технологии:
 - Docker
+- CI/CD
 ### Языки
 - JavaScript
 - JSX
@@ -17,18 +18,13 @@
 - Python 3.11.2
 ### Фреймворки
 - Django
-#### Библиотека Frontend
+#### Фреймворк Frontend
 - React Native
 #### Библиотеки Python
 - Rest Framework
 ### База данных
 - SQLite
-### Пакеты Node.js
-- react
-- reactDOM
-- react-router
-- lucide-react
-### Other toools
+### Other tools
  - Expo App
 ## Установка и запуск Frontend части:
 Напишите в терминале
