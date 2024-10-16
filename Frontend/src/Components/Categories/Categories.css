@@ -1,0 +1,18 @@
+.Categories--Container {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.Categories--Items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.Categories--Items__Image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 20px;
+}
