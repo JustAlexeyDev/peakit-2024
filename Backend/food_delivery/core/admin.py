@@ -1,6 +1,6 @@
 # core/admin.py
 from django.contrib import admin
-from .models import CustomUser, News, Product, Cart, Order
+from .models import CustomUser, News, Product, Cart, Order, Category
 
 @admin.register(CustomUser)
 class CustomUserAdmin(admin.ModelAdmin):
@@ -11,10 +11,16 @@ class CustomUserAdmin(admin.ModelAdmin):
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'image')
 
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    search_fields = ('name',)
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'ingredients', 'image', 'description')
+    list_display = ('name', 'price', 'ingredients', 'image', 'description', 'category')
     search_fields = ('name', 'ingredients')
+    list_filter = ('category',)
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
