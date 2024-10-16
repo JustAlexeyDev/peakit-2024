@@ -13,7 +13,7 @@ class NewsAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('name', 'image')  # Добавляем поле image
     search_fields = ('name',)
 
 @admin.register(Product)
