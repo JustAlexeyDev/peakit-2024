@@ -1,6 +1,6 @@
 # core/serializers.py
 from rest_framework import serializers
-from .models import CustomUser, News, Product, Cart, Order
+from .models import CustomUser, News, Product, Cart, Order, Category
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,10 +12,17 @@ class NewsSerializer(serializers.ModelSerializer):
         model = News
         fields = ['id', 'image']
 
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name']
+
 class ProductSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True)
+
     class Meta:
         model = Product
-        fields = ['id', 'name', 'price', 'ingredients', 'image', 'description']
+        fields = ['id', 'name', 'price', 'ingredients', 'image', 'description', 'category']
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
