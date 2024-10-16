@@ -30,10 +30,8 @@ const RegisterScreen = () => {
       }
 
       const data = await response.json();
-      const token = data.token;
-      document.cookie = `authToken=${token}; path=/`;
       console.log('User registered successfully:', data);
-      navigate('/menu');
+      navigate('/LoginScreen');
     } catch (error) {
       console.error('Error registering user:', error);
       setError(`Ошибка при регистрации: ${error.message}`);
@@ -63,7 +61,7 @@ const RegisterScreen = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleRegister}>Зарегистрироваться</button>
-      <p>Уже есть аккаунт? <button onClick={() => navigate('/login')}>Войти</button></p>
+      <p>Уже есть аккаунт? <button onClick={() => navigate('/LoginScreen')}>Войти</button></p>
     </div>
   );
 }
