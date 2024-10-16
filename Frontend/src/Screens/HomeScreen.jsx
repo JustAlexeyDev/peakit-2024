@@ -1,9 +1,9 @@
-
+import Categories from "../Components/Categories/Categories";
 
 const HomeScreen = () => {
   return(
     <div>
-      200 HS
+      <Categories />
     </div>
   );
 }
