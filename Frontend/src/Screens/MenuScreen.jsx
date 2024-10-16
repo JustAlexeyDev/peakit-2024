@@ -1,14 +1,38 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ip from "../config";
 import './Styles/MenuScreen.css'; // Подключаем CSS
 
 const MenuScreen = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const category = queryParams.get('category');
+
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const response = await fetch(`${ip}/api/users/`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        if (data.length > 0) {
+          setIsLoggedIn(true);
+        } else {
+          navigate('/register');
+        }
+      } catch (error) {
+        console.error('Error checking session:', error);
+        navigate('/register');
+      }
+    };
+
+    checkSession();
+  }, [navigate]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -30,12 +54,43 @@ const MenuScreen = () => {
     fetchProducts();
   }, [category]);
 
+  const saveCartToServer = async (cartData) => {
+    try {
+      const response = await fetch(`${ip}/api/carts/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cartData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log('Cart saved successfully:', data);
+    } catch (error) {
+      console.error('Error saving cart:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      saveCartToServer(cart);
+    }
+  }, [cart, isLoggedIn]);
+
   const addToCart = useCallback((productId) => {
+    if (!isLoggedIn) {
+      navigate('/RegisterScreen');
+      return;
+    }
     setCart(prevCart => ({
       ...prevCart,
       [productId]: (prevCart[productId] || 0) + 1
     }));
-  }, []);
+  }, [isLoggedIn, navigate]);
 
   const removeFromCart = useCallback((productId) => {
     setCart(prevCart => {
