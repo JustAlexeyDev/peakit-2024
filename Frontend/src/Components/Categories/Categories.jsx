@@ -24,7 +24,7 @@ const Categories = () => {
 
   return (
     <div>
-      <h1>Product Details</h1>
+      <h2>Категории</h2>
       {products.length > 0 ? (
         products.map((product) => (
           <div key={product.id}>
