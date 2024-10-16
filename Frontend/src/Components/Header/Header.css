@@ -1,0 +1,28 @@
+.Header--Container {
+  display: flex;
+  background-color: var(--accent--color);
+  width: 100%;
+  padding: 16px;
+  justify-content: space-between;
+  align-items: center;
+}
+.Header--Container__ProfileButton {
+  border-radius: 999px;
+}
+.Header--Container__Search {
+  background-color: #fff;
+  border-radius: 8px;
+  display: flex;
+  padding: 4px;
+  height: 100%;
+  align-items: center;
+}
+.Header--Container__Search button {
+  background-color: #EBEBEB;
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+}
+.Header--Container__Search input {
+  align-items: center;
+}
