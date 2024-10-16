@@ -4,6 +4,11 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from .models import CustomUser, News, Product, Cart, Order, Category
 from .serializers import CustomUserSerializer, NewsSerializer, ProductSerializer, CartSerializer, OrderSerializer, CategorySerializer
+from rest_framework.permissions import AllowAny
+from rest_framework.views import APIView
+
+class MyView(APIView):
+    permission_classes = [AllowAny]
 
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
