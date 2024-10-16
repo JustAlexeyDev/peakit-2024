@@ -25,6 +25,7 @@ class News(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='categories/')  # Добавляем поле для изображения
 
     def __str__(self):
         return self.name
