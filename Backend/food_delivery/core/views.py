@@ -7,6 +7,9 @@ from .serializers import CustomUserSerializer, NewsSerializer, ProductSerializer
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
+
 class MyView(APIView):
     permission_classes = [AllowAny]
 
@@ -48,3 +51,28 @@ class CartViewSet(viewsets.ModelViewSet):
             serializer.save(cart=cart)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
+
+class RegisterView(APIView):
+    def post(self, request):
+        try:
+            username = request.data.get('username')
+            password = request.data.get('password')
+            phone_number = request.data.get('phone_number')
+
+            if not username or not password or not phone_number:
+                return Response({'error': 'Пожалуйста, заполните все поля'}, status=status.HTTP_400_BAD_REQUEST)
+
+            if User.objects.filter(username=username).exists():
+                return Response({'error': 'Пользователь с таким именем уже существует'}, status=status.HTTP_400_BAD_REQUEST)
+
+            user = User(username=username, password=make_password(password))
+            user.save()
+
+            return Response({'message': 'Пользователь успешно зарегистрирован'}, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
