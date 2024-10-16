@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ip from "../../config";
+import "./Categories.css";
 
 const Categories = () => {
   const [products, setProducts] = useState([]);
@@ -13,7 +14,6 @@ const Categories = () => {
         }
         const data = await response.json();
         setProducts(data);
-        console.log(data);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -23,14 +23,17 @@ const Categories = () => {
   }, []);
 
   return (
-    <div>
+    <div className='Categories--Container'>
       <h2>Категории</h2>
       {products.length > 0 ? (
-        products.map((product) => (
-          <div key={product.id}>
-            <img src={product.image} alt={product.name || 'Product Image'} />
-          </div>
-        ))
+        <div className='Categories--Items'>
+          {products.map((product) => (
+            <div key={product.id}>
+              <img className='Categories--Items__Image' src={product.image} alt={product.name || 'Product Image'} />
+            </div>
+          ))}          
+        </div>
+
       ) : (
         <p>Нет доступных категорий</p>
       )}
