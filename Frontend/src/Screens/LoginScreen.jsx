@@ -29,7 +29,7 @@ const LoginScreen = () => {
       }
 
       const data = await response.json();
-      const token = data.token;
+      const token = data.access;
       document.cookie = `authToken=${token}; path=/`;
       console.log('User logged in successfully:', data);
       navigate('/HomeScreen');
