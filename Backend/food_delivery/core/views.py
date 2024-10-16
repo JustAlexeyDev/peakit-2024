@@ -2,8 +2,8 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from .models import CustomUser, News, Product, Cart, Order
-from .serializers import CustomUserSerializer, NewsSerializer, ProductSerializer, CartSerializer, OrderSerializer
+from .models import CustomUser, News, Product, Cart, Order, Category
+from .serializers import CustomUserSerializer, NewsSerializer, ProductSerializer, CartSerializer, OrderSerializer, CategorySerializer
 
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
@@ -22,6 +22,10 @@ class CustomUserViewSet(viewsets.ModelViewSet):
 class NewsViewSet(viewsets.ModelViewSet):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
