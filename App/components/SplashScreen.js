@@ -4,8 +4,8 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 const SplashScreen = () => {
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/images/logo.png')} style={styles.logo} />
-      <Text style={styles.text}>Loading...</Text>
+      {/* <Image source={require('../assets/images/logo.png')} style={styles.logo} /> */}
+      <Text style={styles.text}>Загрузка...</Text>
     </View>
   );
 };
