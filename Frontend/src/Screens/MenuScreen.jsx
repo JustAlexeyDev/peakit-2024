@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ip from "../config";
-import './Styles/MenuScreen.css'; // Подключаем CSS
+import './Styles/MenuScreen.css'; 
 
-const MenuScreen = () => {
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState({});
+const MenuScreen = ({ searchTerm, cart, setCart, products, setProducts }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -23,11 +21,11 @@ const MenuScreen = () => {
         if (data.length > 0) {
           setIsLoggedIn(true);
         } else {
-          navigate('/register');
+          navigate('/RegisterScreen');
         }
       } catch (error) {
         console.error('Error checking session:', error);
-        navigate('/register');
+        navigate('/RegisterScreen');
       }
     };
 
@@ -52,7 +50,7 @@ const MenuScreen = () => {
     };
 
     fetchProducts();
-  }, [category]);
+  }, [category, setProducts]);
 
   const saveCartToServer = async (cartData) => {
     try {
@@ -90,7 +88,7 @@ const MenuScreen = () => {
       ...prevCart,
       [productId]: (prevCart[productId] || 0) + 1
     }));
-  }, [isLoggedIn, navigate]);
+  }, [isLoggedIn, navigate, setCart]);
 
   const removeFromCart = useCallback((productId) => {
     setCart(prevCart => {
@@ -98,14 +96,14 @@ const MenuScreen = () => {
       delete newCart[productId];
       return newCart;
     });
-  }, []);
+  }, [setCart]);
 
   const updateQuantity = useCallback((productId, quantity) => {
     setCart(prevCart => ({
       ...prevCart,
       [productId]: Math.max(0, (prevCart[productId] || 0) + quantity)
     }));
-  }, []);
+  }, [setCart]);
 
   const totalPrice = useMemo(() => {
     return Object.keys(cart).reduce((total, productId) => {
@@ -114,12 +112,20 @@ const MenuScreen = () => {
     }, 0);
   }, [cart, products]);
 
+  const filteredProducts = useMemo(() => {
+    if (!searchTerm) return products;
+    return products.filter(product =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm, products]);
+
   return (
     <div className="menu-screen">
       <h2>Меню</h2>
-      {products.length > 0 ? (
+      {filteredProducts.length > 0 ? (
         <div className="product-list">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <div key={product.id} className="product-card">
               <img src={product.image} alt={product.name} className="product-image" />
               <div className='product--description'>
@@ -157,6 +163,7 @@ const MenuScreen = () => {
       <div className="total-price">
         <p>Итого: {totalPrice} ₽</p>
       </div>
+      <button onClick={() => navigate('/CartScreen')}>Перейти в корзину</button>
     </div>
   );
 }
