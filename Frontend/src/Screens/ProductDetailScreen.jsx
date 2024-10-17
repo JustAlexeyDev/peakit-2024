@@ -35,8 +35,6 @@ const ProductDetailScreen = ({ products }) => {
         </div>
 
       </div>
-
-      {/* Дополнительные детали о продукте */}
     </div>
   );
 };
