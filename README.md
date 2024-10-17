@@ -8,7 +8,7 @@
 |Разработчик | Коротких Алексей |
 
 ## Технологии:
-- Stripe payment
+- Robokassa payment
 ### Языки
 - JavaScript
 - JSX
