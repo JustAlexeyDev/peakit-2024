@@ -8,7 +8,6 @@
 |Разработчик | Коротких Алексей |
 
 ## Технологии:
-- Robokassa payment
 ### Языки
 - JavaScript
 - JSX
@@ -21,10 +20,14 @@
 
 #### Библиотеки Python
 - Rest Framework
+- simplejwt
+- drf_yasg
 ### База данных
 - SQLite3
 ### Other tools
  - Expo App
+ - Robokassa payment
+ - 
 ## Установка и запуск Frontend части:
 Напишите в терминале
 - `cd Frontend` (Переход в директорию)
