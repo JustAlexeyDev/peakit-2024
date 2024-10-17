@@ -17,8 +17,7 @@ const Header = ({ onSearch }) => {
           <CircleUser color="#fff" />
         </button>
       </div>
-      <div className="Header--Container__Search">
-        <form onSubmit={handleSearch}>
+      <form onSubmit={handleSearch} className="Header--Container__Search">
           <input
             type="search"
             placeholder="Поиск.."
@@ -28,8 +27,7 @@ const Header = ({ onSearch }) => {
           <button type="submit">
             <Search color="#808080" />
           </button>
-        </form>
-      </div>
+      </form>
     </div>
   );
 };
