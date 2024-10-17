@@ -6,6 +6,10 @@ from .models import CustomUser, News, Product, Cart, Order, Category
 from .serializers import CustomUserSerializer, NewsSerializer, ProductSerializer, CartSerializer, OrderSerializer, CategorySerializer
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
+import stripe
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
 
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
@@ -76,3 +80,30 @@ class RegisterView(APIView):
             return Response({'message': 'Пользователь успешно зарегистрирован'}, status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+
+
+stripe.api_key = 'sk_test_your_secret_key'
+
+@csrf_exempt
+def process_payment(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        payment_method_id = data['payment_method_id']
+        amount = data['amount']
+
+        try:
+            # Создайте платеж
+            payment_intent = stripe.PaymentIntent.create(
+                amount=amount,
+                currency='rub',
+                payment_method=payment_method_id,
+                confirmation_method='manual',
+                confirm=True,
+            )
+
+            return JsonResponse({'success': True})
+        except stripe.error.CardError as e:
+            return JsonResponse({'error': e.user_message})
+
+    return JsonResponse({'error': 'Invalid request method'})
