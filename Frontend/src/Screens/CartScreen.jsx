@@ -30,7 +30,8 @@ const CartScreen = ({ cart, products, updateQuantity, removeFromCart, totalPrice
                       <span>{cart[product.id]} шт</span>
                       <button onClick={() => updateQuantity(product.id, 1)}>+</button>
                     </div>
-                    <button className='cart-remove' onClick={() => removeFromCart(product.id)}>Удалить
+                    <button className='cart-remove' onClick={() => removeFromCart(product.id)}>
+                      Удалить
                       <p>Сумма: {cart[product.id] * product.price} ₽</p>
                     </button>
                   </div>
