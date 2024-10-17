@@ -6,10 +6,7 @@ const CartScreen = ({ cart, products, updateQuantity, removeFromCart, totalPrice
   const navigate = useNavigate();
 
   const handleOrder = () => {
-    console.log('Order placed:', cart);
-    // После оформления заказа можно очистить корзину
-    // setCart({});
-    navigate('/order-confirmation');
+    navigate('/payment', { state: { totalPrice } });
   };
 
   return (
@@ -49,7 +46,7 @@ const CartScreen = ({ cart, products, updateQuantity, removeFromCart, totalPrice
         <div className="total-price">
           <p>Итого: {totalPrice} ₽</p>
         </div>
-        <button onClick={handleOrder}>Заказать</button>
+        <button onClick={handleOrder}>Перейти к оплате</button>
       </div>
     </div>
   );
