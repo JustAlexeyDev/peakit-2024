@@ -6,9 +6,11 @@ import MenuScreen from "./Screens/MenuScreen";
 import RegisterScreen from "./Screens/RegisterScreen";
 import LoginScreen from "./Screens/LoginScreen";
 import CartScreen from "./Screens/CartScreen";
+import ProductDetailScreen from "./Screens/ProductDetailScreen";
 
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
+import ip from "./config";
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,6 +22,7 @@ const App = () => {
     const savedProducts = localStorage.getItem('products');
     return savedProducts ? JSON.parse(savedProducts) : [];
   });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -28,6 +31,25 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem('products', JSON.stringify(products));
   }, [products]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`${ip}/api/products/`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setProducts(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const handleSearch = (term) => {
     setSearchTerm(term);
@@ -53,6 +75,10 @@ const App = () => {
     return total + (product ? product.price * cart[productId] : 0);
   }, 0);
 
+  if (loading) {
+    return <div>Загрузка...</div>;
+  }
+
   return (
     <div>
       <Header onSearch={handleSearch} />
@@ -64,6 +90,7 @@ const App = () => {
         <Route path="/RegisterScreen" element={<RegisterScreen />} />
         <Route path="/LoginScreen" element={<LoginScreen />} />
         <Route path="/CartScreen" element={<CartScreen cart={cart} products={products} updateQuantity={updateQuantity} removeFromCart={removeFromCart} totalPrice={totalPrice} />} />
+        <Route path="/product/:productId" element={<ProductDetailScreen products={products} />} />
       </Routes>
       <Footer />
     </div>
