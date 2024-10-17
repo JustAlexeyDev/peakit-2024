@@ -8,8 +8,7 @@
 |Разработчик | Коротких Алексей |
 
 ## Технологии:
-- Docker
-- CI/CD
+- Stripe payment
 ### Языки
 - JavaScript
 - JSX
@@ -18,12 +17,12 @@
 - Python 3.11.2
 ### Фреймворки
 - Django
-#### Фреймворк Frontend
 - React Native
+
 #### Библиотеки Python
 - Rest Framework
 ### База данных
-- SQLite
+- SQLite3
 ### Other tools
  - Expo App
 ## Установка и запуск Frontend части:
