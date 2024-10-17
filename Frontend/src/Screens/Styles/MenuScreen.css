@@ -1,5 +1,5 @@
 .menu-screen {
-  padding: 20px;
+  padding: 16px;
 }
 
 .product-list {
@@ -16,8 +16,8 @@
   border-radius: 20px;
   overflow: hidden;
   min-height: 190px;
-  width: 100%; /* Фиксированная ширина */
-  height: 300px; /* Фиксированная высота */
+  width: 100%;
+  height: 300px; 
 }
 
 .product-card:hover {
@@ -27,7 +27,7 @@
 .product-image {
   display: flex;
   max-width: 100%;
-  height: 150px; /* Фиксированная высота для изображения */
+  height: 150px; 
   object-fit: cover;
 }
 
@@ -37,21 +37,21 @@
   justify-content: space-between;
   padding: 16px;
   gap: 20px;
-  flex-grow: 1; /* Заполнение оставшегося пространства */
+  flex-grow: 1; 
 }
 
 .product--description h3 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 18px; /* Уменьшен размер шрифта для заголовка */
+  font-size: 18px; 
 }
 
 .product--description p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 14px; /* Уменьшен размер шрифта для описания */
+  font-size: 14px; 
 }
 
 .cart-controls {
@@ -78,7 +78,7 @@
   padding: 8px 20px;
   border-radius: 8px;
   width: 100%;
-  height: 40px;
+  height: 50px;
 }
 
 .product--buy--button__remove {
@@ -101,7 +101,11 @@
 .total-price {
   margin-top: 20px;
   font-size: 1.2em;
-  font-weight: bold;
+}
+.Total--Order button {
+  background-color: var(--second--accent--color);
+  color: #fff;
+  border-radius: 8px;
 }
 
 @media (max-width: 768px) {
@@ -113,7 +117,7 @@
     flex-direction: row;
     min-height: auto;
     border-radius: 10px;
-    height: 150px; /* Фиксированная высота для маленьких экранов */
+    height: 150px; 
   }
 
   .product-image {
