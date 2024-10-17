@@ -6,23 +6,34 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .Header--Container__ProfileButton {
-  border-radius: 999px;
+  border-radius: 9999px;
 }
+
+.Header--Container__ProfileButton button {
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
 .Header--Container__Search {
-  background-color: #fff;
-  border-radius: 8px;
   display: flex;
-  padding: 4px;
-  height: 100%;
   align-items: center;
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 8px;
 }
+
+.Header--Container__Search input {
+
+}
+
 .Header--Container__Search button {
   background-color: #EBEBEB;
-  border-radius: 8px;
-  width: 30px;
-  height: 30px;
-}
-.Header--Container__Search input {
+  width: 40px;
+  height: 40px;
   align-items: center;
+  display: flex;
+  justify-content: center;
 }
