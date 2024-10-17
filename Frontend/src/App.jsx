@@ -7,6 +7,7 @@ import RegisterScreen from "./Screens/RegisterScreen";
 import LoginScreen from "./Screens/LoginScreen";
 import CartScreen from "./Screens/CartScreen";
 import ProductDetailScreen from "./Screens/ProductDetailScreen";
+import PaymentScreenWrapper from "./Screens/PaymentScreen";
 
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
@@ -81,17 +82,21 @@ const App = () => {
 
   return (
     <div>
-      <Header onSearch={handleSearch} />
-      <Routes>
-        <Route path="/*" element={<NotFoundScreen />} />
-        <Route path="/" element={<HomeScreen />} />
-        <Route path="/HomeScreen" element={<HomeScreen />} />
-        <Route path="/MenuScreen" element={<MenuScreen searchTerm={searchTerm} cart={cart} setCart={setCart} products={products} setProducts={setProducts} />} />
-        <Route path="/RegisterScreen" element={<RegisterScreen />} />
-        <Route path="/LoginScreen" element={<LoginScreen />} />
-        <Route path="/CartScreen" element={<CartScreen cart={cart} products={products} updateQuantity={updateQuantity} removeFromCart={removeFromCart} totalPrice={totalPrice} />} />
-        <Route path="/product/:productId" element={<ProductDetailScreen products={products} />} />
-      </Routes>
+      <div className="Page">
+        <Header onSearch={handleSearch} />
+        <Routes>
+          <Route path="/*" element={<NotFoundScreen />} />
+          <Route path="/" element={<HomeScreen />} />
+          <Route path="/HomeScreen" element={<HomeScreen />} />
+          <Route path="/MenuScreen" element={<MenuScreen searchTerm={searchTerm} cart={cart} setCart={setCart} products={products} setProducts={setProducts} />} />
+          <Route path="/RegisterScreen" element={<RegisterScreen />} />
+          <Route path="/LoginScreen" element={<LoginScreen />} />
+          <Route path="/CartScreen" element={<CartScreen cart={cart} products={products} updateQuantity={updateQuantity} removeFromCart={removeFromCart} totalPrice={totalPrice} />} />
+          <Route path="/product/:productId" element={<ProductDetailScreen products={products} />} />
+          <Route path="/payment" element={<PaymentScreenWrapper />} />
+        </Routes>        
+      </div>
+
       <Footer />
     </div>
   );
