@@ -1,3 +1,4 @@
+// MenuScreen.js
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ip from "../config";
@@ -120,13 +121,17 @@ const MenuScreen = ({ searchTerm, cart, setCart, products, setProducts }) => {
     );
   }, [searchTerm, products]);
 
+  const viewProductDetails = (productId) => {
+    navigate(`/product/${productId}`);
+  };
+
   return (
     <div className="menu-screen">
       <h2>Меню</h2>
       {filteredProducts.length > 0 ? (
         <div className="product-list">
           {filteredProducts.map((product) => (
-            <div key={product.id} className="product-card">
+            <div onClick={() => viewProductDetails(product.id)} key={product.id} className="product-card">
               <img src={product.image} alt={product.name} className="product-image" />
               <div className='product--description'>
                 <div>
@@ -136,23 +141,23 @@ const MenuScreen = ({ searchTerm, cart, setCart, products, setProducts }) => {
                 {cart[product.id] ? (
                   <div className="cart-controls">
                     <div className='product--buy--button'>
-                      <button onClick={() => updateQuantity(product.id, -1)}>-</button>
+                      <button onClick={(e) => { e.stopPropagation(); updateQuantity(product.id, -1); }}>-</button>
                       <span>{cart[product.id]} шт</span>
-                      <button onClick={() => updateQuantity(product.id, 1)}>+</button>
+                      <button onClick={(e) => { e.stopPropagation(); updateQuantity(product.id, 1); }}>+</button>
                     </div>
                     <div className='product--buy--button__remove'>
-                      <button onClick={() => removeFromCart(product.id)}>
+                      <button onClick={(e) => { e.stopPropagation(); removeFromCart(product.id); }}>
                         Удалить
                         <p>({cart[product.id] * product.price} ₽)</p>  
                       </button>
                     </div>
                   </div>
                 ) : (
-                  <button className='product--buy--button' onClick={() => addToCart(product.id)}>
+                  <button className='product--buy--button' onClick={(e) => { e.stopPropagation(); addToCart(product.id); }}>
                     <b>В Корзину </b>
                     <p>{product.price} ₽</p>
                   </button>
-                )}               
+                )}
               </div>
             </div>
           ))}
